@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vicnot - FAQs</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: #0d9488;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    a:hover, a:focus {
+      color: #114d49;
+      outline: none;
+      transform: translateY(-2px);
+    }
+    header {
+      background-color: #0f172a;
+      color: #f1f5f9;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgb(15 23 42 / 0.3);
+    }
+    .nav-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: 0.08em;
+      color: #0d9488;
+      user-select: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul li a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.4rem 0;
+      position: relative;
+      display: inline-block;
+    }
+    nav ul li a.active::after,
+    nav ul li a:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 3px;
+      background: #0d9488;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    nav ul li a::after {
+      width: 0;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background-color: #0f172a;
+        position: absolute;
+        top: 60px;
+        right: 2rem;
+        width: 200px;
+        padding: 1rem 0;
+        border-radius: 6px;
+        display: none;
+        box-shadow: 0 4px 30px rgb(15 23 42 / 0.4);
+      }
+      nav ul.show {
+        display: flex;
+      }
+      nav ul li {
+        margin: 0.5rem 0;
+        text-align: right;
+        margin-right: 1.5rem;
+      }
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.75rem;
+      color: #0d9488;
+      cursor: pointer;
+      user-select: none;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+    }
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 2.5rem auto 3rem;
+      padding: 0 1rem;
+    }
+    h1 {
+      color: #064e49;
+      margin-bottom: 2rem;
+      font-weight: 800;
+      user-select: none;
+      text-align: center;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 12px 28px rgb(100 116 139 / 0.1);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .faq-item:hover, .faq-item:focus-within {
+      box-shadow: 0 18px 40px rgb(13 148 136 / 0.2);
+      outline: none;
+    }
+    .faq-question {
+      padding: 1.5rem 2rem;
+      font-weight: 700;
+      color: #0d9488;
+      font-size: 1.25rem;
+      user-select: none;
+      position: relative;
+    }
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: #0d9488;
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-question::after {
+      content: '-';
+      transform: translateY(-50%);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 2rem;
+      color: #475569;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+      padding: 1rem 2rem 1.5rem;
+    }
+    footer {
+      background-color: #0f172a;
+      color: #a5f3fc;
+      padding: 3rem 1rem 2rem;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+      user-select: none;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: center;
+    }
+    .footer-block {
+      min-width: 180px;
+      flex: 1;
+    }
+    .footer-block h4 {
+      margin-bottom: 1.2rem;
+      color: #5eead4;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+    .footer-links,
+    .footer-contact {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 0.7rem;
+    }
+    .footer-links li a,
+    .footer-contact li a {
+      color: #a5f3fc;
+      transition: color 0.3s ease;
+    }
+    .footer-links li a:hover,
+    .footer-contact li a:hover {
+      color: #0d9488;
+      outline: none;
+    }
+    .footer-contact li i {
+      margin-right: 0.6rem;
+      color: #0d9488;
+      min-width: 18px;
+      text-align: center;
+    }
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.3rem;
+      justify-content: center;
+    }
+    .footer-social a {
+      color: #a5f3fc;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    .footer-social a:hover,
+    .footer-social a:focus {
+      color: #0d9488;
+      outline: none;
+    }
+    .copyright {
+      margin-top: 2.5rem;
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+    /* Accessibility focus outlines */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #0d9488;
+      outline-offset: 3px;
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <div class="nav-container">
+    <div class="nav-logo">Vicnot</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="faqs.html" class="active">FAQs</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Frequently Asked Questions</h1>
+
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq1" aria-label="What services does Vicnot offer?">
+    <div class="faq-question">What services does Vicnot offer?</div>
+    <div class="faq-answer" id="faq1" role="region" aria-hidden="true">
+      Vicnot offers services in Search Engine Optimization (SEO), Internet of Things (IoT) Solutions, and Custom Software Development to help businesses thrive in the digital era.
+    </div>
+  </div>
+
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq2" aria-label="How can I contact Vicnot for a project inquiry?">
+    <div class="faq-question">How can I contact Vicnot for a project inquiry?</div>
+    <div class="faq-answer" id="faq2" role="region" aria-hidden="true">
+      You can contact us through our Contact Us page on the website, or email us directly at info@vicnot.com. We're happy to discuss your needs and how we can help.
+    </div>
+  </div>
+
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq3" aria-label="What is the typical timeline for a custom software project?">
+    <div class="faq-question">What is the typical timeline for a custom software project?</div>
+    <div class="faq-answer" id="faq3" role="region" aria-hidden="true">
+      Timeline depends on the project scope and complexity. After requirement analysis, we provide a detailed plan, but typically projects range from a few weeks to several months.
+    </div>
+  </div>
+
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq4" aria-label="Does Vicnot support post-launch maintenance and updates?">
+    <div class="faq-question">Does Vicnot support post-launch maintenance and updates?</div>
+    <div class="faq-answer" id="faq4" role="region" aria-hidden="true">
+      Yes, we provide ongoing support and maintenance to ensure your software or IoT solution continues to perform optimally after launch.
+    </div>
+  </div>
+  
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false" aria-controls="faq5" aria-label="Do you provide remote services?">
+    <div class="faq-question">Do you provide remote services?</div>
+    <div class="faq-answer" id="faq5" role="region" aria-hidden="true">
+      Absolutely, we collaborate effectively with clients worldwide through digital communication tools and remote project management.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-block">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="sitemap.html">Sitemap</a></li>
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+      </ul>
+    </div>
+    <div class="footer-block">
+      <h4>Contact Info</h4>
+      <ul class="footer-contact">
+        <li><i class="fas fa-map-marker-alt"></i>123 Tech Street, Silicon City</li>
+        <li><i class="fas fa-phone-alt"></i>+1 (800) 123-4567</li>
+        <li><i class="fas fa-envelope"></i>info@vicnot.com</li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+  <p class="copyright">&copy; 2023 Vicnot. All rights reserved.</p>
+</footer>
+
+<script>
+  // FAQ toggle script
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => toggleFaq(item));
+    item.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFaq(item);
+      }
+    });
+  });
+
+  function toggleFaq(item) {
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-answer').setAttribute('aria-hidden', 'true');
+      el.setAttribute('aria-expanded', 'false');
+    });
+    // Toggle current
+    if (!isOpen) {
+      item.classList.add('open');
+      item.querySelector('.faq-answer').setAttribute('aria-hidden', 'false');
+      item.setAttribute('aria-expanded', 'true');
+    }
+  }
+</script>
+</body>
+</html>

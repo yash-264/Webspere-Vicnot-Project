@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vicnot - Contact Us</title>
+    <style>
+        /* Reset and base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a {
+            color: #0d9488;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        a:hover, a:focus {
+            color: #114d49;
+            outline: none;
+            transform: translateY(-2px);
+        }
+        header {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgb(15 23 42 / 0.3);
+        }
+        .nav-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.08em;
+            color: #0d9488;
+            user-select: none;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav ul li a {
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.4rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        nav ul li a.active::after,
+        nav ul li a:hover::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 3px;
+            background: #0d9488;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        nav ul li a::after {
+            width: 0;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                background-color: #0f172a;
+                position: absolute;
+                top: 60px;
+                right: 2rem;
+                width: 200px;
+                padding: 1rem 0;
+                border-radius: 6px;
+                display: none;
+                box-shadow: 0 4px 30px rgb(15 23 42 / 0.4);
+            }
+            nav ul.show {
+                display: flex;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: right;
+                margin-right: 1.5rem;
+            }
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.75rem;
+            color: #0d9488;
+            cursor: pointer;
+            user-select: none;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+        main {
+            flex-grow: 1;
+            max-width: 640px;
+            margin: 2.5rem auto 3rem;
+            padding: 0 1rem;
+        }
+        h1 {
+            color: #064e49;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            user-select: none;
+            text-align: center;
+        }
+        form {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 12px 28px rgb(100 116 139 / 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        label {
+            font-weight: 600;
+            color: #0d9488;
+            margin-bottom: 0.5rem;
+            user-select: none;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1e293b;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #0d9488;
+            outline: none;
+            box-shadow: 0 0 6px rgb(13 148 136 / 0.5);
+        }
+        textarea {
+            min-height: 120px;
+        }
+        button {
+            background-color: #0d9488;
+            color: #e0f2f1;
+            padding: 0.85rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 6px 12px rgb(13 148 136 / 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.35s ease;
+            user-select: none;
+        }
+        button:hover,
+        button:focus {
+            background-color: #064e49;
+            box-shadow: 0 8px 20px rgb(6 78 73 / 0.7);
+            outline: none;
+        }
+        .contact-info {
+            margin-top: 3rem;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgb(100 116 139 / 0.1);
+            color: #475569;
+        }
+        .contact-info h2 {
+            color: #064e49;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .contact-info p {
+            margin-bottom: 0.7rem;
+            font-size: 1.05rem;
+        }
+        footer {
+            background-color: #0f172a;
+            color: #a5f3fc;
+            padding: 3rem 1rem 2rem;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            user-select: none;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+        }
+        .footer-block {
+            min-width: 180px;
+            flex: 1;
+        }
+        .footer-block h4 {
+            margin-bottom: 1.2rem;
+            color: #5eead4;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .footer-links,
+        .footer-contact {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li,
+        .footer-contact li {
+            margin-bottom: 0.7rem;
+        }
+        .footer-links li a,
+        .footer-contact li a {
+            color: #a5f3fc;
+            transition: color 0.3s ease;
+        }
+        .footer-links li a:hover,
+        .footer-contact li a:hover {
+            color: #0d9488;
+            outline: none;
+        }
+        .footer-contact li i {
+            margin-right: 0.6rem;
+            color: #0d9488;
+            min-width: 18px;
+            text-align: center;
+        }
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.3rem;
+            justify-content: center;
+        }
+        .footer-social a {
+            color: #a5f3fc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .footer-social a:hover,
+        .footer-social a:focus {
+            color: #0d9488;
+            outline: none;
+        }
+        .copyright {
+            margin-top: 2.5rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        /* Accessibility focus outlines */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #0d9488;
+            outline-offset: 3px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="nav-container">
+        <div class="nav-logo">Vicnot</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li><a href="careers.html">Careers</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h1>Contact Us</h1>
+    <form id="contactForm" novalidate>
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required placeholder="Your full name" aria-required="true" />
+        
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="Your email address" aria-required="true" />
+        
+        <label for="subject">Subject *</label>
+        <input type="text" id="subject" name="subject" required placeholder="Subject" aria-required="true" />
+        
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" required placeholder="Your message here..." aria-required="true"></textarea>
+        
+        <button type="submit">Send Message</button>
+    </form>
+
+    <section class="contact-info" aria-label="Company Contact Information">
+        <h2>Get in Touch</h2>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon City</p>
+        <p><i class="fas fa-phone-alt"></i> +1 (800) 123-4567</p>
+        <p><i class="fas fa-envelope"></i> info@vicnot.com</p>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-block">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h4>Contact Info</h4>
+            <ul class="footer-contact">
+                <li><i class="fas fa-map-marker-alt"></i>123 Tech Street, Silicon City</li>
+                <li><i class="fas fa-phone-alt"></i>+1 (800) 123-4567</li>
+                <li><i class="fas fa-envelope"></i>info@vicnot.com</li>
+            </ul>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">&copy; 2023 Vicnot. All rights reserved.</p>
+</footer>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Simple form validation
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const subject = this.subject.value.trim();
+    const message = this.message.value.trim();
+    if (!name || !email || !subject || !message) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+    // Basic email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    alert('Thank you for contacting Vicnot! We will get back to you shortly.');
+    this.reset();
+});
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vicnot - Contact Us</title>
+    <style>
+        /* Reset and base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a {
+            color: #0d9488;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        a:hover, a:focus {
+            color: #114d49;
+            outline: none;
+            transform: translateY(-2px);
+        }
+        header {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgb(15 23 42 / 0.3);
+        }
+        .nav-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.08em;
+            color: #0d9488;
+            user-select: none;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav ul li a {
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.4rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        nav ul li a.active::after,
+        nav ul li a:hover::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 3px;
+            background: #0d9488;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        nav ul li a::after {
+            width: 0;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                background-color: #0f172a;
+                position: absolute;
+                top: 60px;
+                right: 2rem;
+                width: 200px;
+                padding: 1rem 0;
+                border-radius: 6px;
+                display: none;
+                box-shadow: 0 4px 30px rgb(15 23 42 / 0.4);
+            }
+            nav ul.show {
+                display: flex;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: right;
+                margin-right: 1.5rem;
+            }
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.75rem;
+            color: #0d9488;
+            cursor: pointer;
+            user-select: none;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+        main {
+            flex-grow: 1;
+            max-width: 640px;
+            margin: 2.5rem auto 3rem;
+            padding: 0 1rem;
+        }
+        h1 {
+            color: #064e49;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            user-select: none;
+            text-align: center;
+        }
+        form {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 12px 28px rgb(100 116 139 / 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        label {
+            font-weight: 600;
+            color: #0d9488;
+            margin-bottom: 0.5rem;
+            user-select: none;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1e293b;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #0d9488;
+            outline: none;
+            box-shadow: 0 0 6px rgb(13 148 136 / 0.5);
+        }
+        textarea {
+            min-height: 120px;
+        }
+        button {
+            background-color: #0d9488;
+            color: #e0f2f1;
+            padding: 0.85rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 6px 12px rgb(13 148 136 / 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.35s ease;
+            user-select: none;
+        }
+        button:hover,
+        button:focus {
+            background-color: #064e49;
+            box-shadow: 0 8px 20px rgb(6 78 73 / 0.7);
+            outline: none;
+        }
+        .contact-info {
+            margin-top: 3rem;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgb(100 116 139 / 0.1);
+            color: #475569;
+        }
+        .contact-info h2 {
+            color: #064e49;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .contact-info p {
+            margin-bottom: 0.7rem;
+            font-size: 1.05rem;
+        }
+        footer {
+            background-color: #0f172a;
+            color: #a5f3fc;
+            padding: 3rem 1rem 2rem;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            user-select: none;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+        }
+        .footer-block {
+            min-width: 180px;
+            flex: 1;
+        }
+        .footer-block h4 {
+            margin-bottom: 1.2rem;
+            color: #5eead4;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .footer-links,
+        .footer-contact {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li,
+        .footer-contact li {
+            margin-bottom: 0.7rem;
+        }
+        .footer-links li a,
+        .footer-contact li a {
+            color: #a5f3fc;
+            transition: color 0.3s ease;
+        }
+        .footer-links li a:hover,
+        .footer-contact li a:hover {
+            color: #0d9488;
+            outline: none;
+        }
+        .footer-contact li i {
+            margin-right: 0.6rem;
+            color: #0d9488;
+            min-width: 18px;
+            text-align: center;
+        }
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.3rem;
+            justify-content: center;
+        }
+        .footer-social a {
+            color: #a5f3fc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .footer-social a:hover,
+        .footer-social a:focus {
+            color: #0d9488;
+            outline: none;
+        }
+        .copyright {
+            margin-top: 2.5rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        /* Accessibility focus outlines */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #0d9488;
+            outline-offset: 3px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="nav-container">
+        <div class="nav-logo">Vicnot</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li><a href="careers.html">Careers</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h1>Contact Us</h1>
+    <form id="contactForm" novalidate>
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required placeholder="Your full name" aria-required="true" />
+        
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="Your email address" aria-required="true" />
+        
+        <label for="subject">Subject *</label>
+        <input type="text" id="subject" name="subject" required placeholder="Subject" aria-required="true" />
+        
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" required placeholder="Your message here..." aria-required="true"></textarea>
+        
+        <button type="submit">Send Message</button>
+    </form>
+
+    <section class="contact-info" aria-label="Company Contact Information">
+        <h2>Get in Touch</h2>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon City</p>
+        <p><i class="fas fa-phone-alt"></i> +1 (800) 123-4567</p>
+        <p><i class="fas fa-envelope"></i> info@vicnot.com</p>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-block">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h4>Contact Info</h4>
+            <ul class="footer-contact">
+                <li><i class="fas fa-map-marker-alt"></i>123 Tech Street, Silicon City</li>
+                <li><i class="fas fa-phone-alt"></i>+1 (800) 123-4567</li>
+                <li><i class="fas fa-envelope"></i>info@vicnot.com</li>
+            </ul>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">&copy; 2023 Vicnot. All rights reserved.</p>
+</footer>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Simple form validation
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const subject = this.subject.value.trim();
+    const message = this.message.value.trim();
+    if (!name || !email || !subject || !message) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+    // Basic email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    alert('Thank you for contacting Vicnot! We will get back to you shortly.');
+    this.reset();
+});
+</script>
+</body>
+</html>
+
+
+  

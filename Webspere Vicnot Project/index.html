@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vicnot - Professional Technology Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="script.js">
+ </head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="nav-logo" tabindex="0" aria-label="Vicnot Home">Vicnot</div>
+      <nav>
+        <ul id="nav-links" role="menubar" aria-label="Primary navigation">
+          <li role="none"><a href="index.html" class="active" role="menuitem" aria-current="page">Home</a></li>
+          <li role="none"><a href="about.html" role="menuitem">About Us</a></li>
+          <li role="none"><a href="services.html" role="menuitem">Services</a></li>
+          <li role="none"><a href="portfolio.html" role="menuitem">Portfolio</a></li>
+          <li role="none"><a href="contact.html" role="menuitem">Contact Us</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu" role="button" tabindex="0" aria-expanded="false" aria-controls="nav-links">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" aria-label="Introduction to Vicnot and services">
+      <div class="hero-text">
+        <h1>Empowering Your Business with Cutting-edge Technology</h1>
+        <p>Partner with Vicnot for expert SEO, innovative IoT solutions, and custom software development designed to accelerate your growth.</p>
+        <a href="services.html" class="btn-primary" role="button">Explore Our Services</a>
+      </div>
+      <div class="hero-image" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=600&q=80" alt="" />
+      </div>
+    </section>
+
+    <section class="services-overview" aria-label="Overview of Vicnot services">
+      <article class="service-card" tabindex="0" aria-labelledby="seoTitle" aria-describedby="seoDesc">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <h3 id="seoTitle">Search Engine Optimization</h3>
+        <p id="seoDesc">Increase your online presence and drive targeted traffic using our data-driven SEO strategies tailored to your business goals.</p>
+      </article>
+      <article class="service-card" tabindex="0" aria-labelledby="iotTitle" aria-describedby="iotDesc">
+        <i class="fas fa-microchip" aria-hidden="true"></i>
+        <h3 id="iotTitle">Internet of Things (IoT)</h3>
+        <p id="iotDesc">Seamlessly connect and manage your devices with our scalable, secure IoT solutions for smarter operations and analytics.</p>
+      </article>
+      <article class="service-card" tabindex="0" aria-labelledby="devTitle" aria-describedby="devDesc">
+        <i class="fas fa-code" aria-hidden="true"></i>
+        <h3 id="devTitle">Custom Software Development</h3>
+        <p id="devDesc">Develop bespoke software that aligns perfectly with your workflows to enhance efficiency and foster innovation.</p>
+      </article>
+    </section>
+     <!-- 7. Latest Blog Articles -->
+    <section id="blog" aria-label="Latest Blog Articles and Company News">
+      <h2>Latest Insights & Updates</h2>
+      <ul class="article-list">
+        <li>
+          <a href="blog.html#article1" tabindex="0">Leveraging AI in SEO Strategy</a>
+          <span class="article-preview">Exploring how AI-driven analytics can improve your SEO outcomes.</span>
+        </li>
+        <li>
+          <a href="blog.html#article2" tabindex="0">Top 5 IoT Applications for Enterprises</a>
+          <span class="article-preview">Discover innovative IoT use cases to accelerate your digital transformation.</span>
+        </li>
+        <li>
+          <a href="blog.html#article3" tabindex="0">Custom Software vs Off-the-Shelf: Making the Right Choice</a>
+          <span class="article-preview">Considerations for selecting the best software solution tailored to your needs.</span>
+        </li>
+      </ul>
+    </section>
+    <!-- 5. Portfolio Preview -->
+    <section id="portfolio" aria-label="Our Projects Showcase">
+      <h2>Projects That Define Us</h2>
+      <div class="project-grid">
+        <article class="project" tabindex="0" role="figure" aria-label="SEO Campaign for Retail Client">
+          <img src="https://img.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_39422-971.jpg?ga=GA1.1.1897646714.1743826808&semt=ais_hybrid&w=740" alt="" />
+          <div class="project-content">
+            <h4>SEO Campaign for Retail Growth</h4>
+            <p>Boosted organic traffic by 70% in six months for a major retail client through smart, data-driven SEO.</p>
+          </div>
+        </article>
+
+        <article class="project" tabindex="0" role="figure" aria-label="IoT Automation in Manufacturing">
+          <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg?ga=GA1.1.1897646714.1743826808&semt=ais_hybrid&w=740" alt="Screenshot of IoT automation solution for manufacturing" />
+          <div class="project-content">
+            <h4>Smart IoT Manufacturing Automation</h4>
+            <p>Dashboard and sensor integration dramatically increased productivity and cut downtime.</p>
+          </div>
+        </article>
+
+        <article class="project" tabindex="0" role="figure" aria-label="Custom ERP Development">
+          <img src="https://img.freepik.com/premium-photo/notebook-closeup-photo-css-javascript-html-usage-monitor-closeup-function-source-code-abstract-it-technology-background-software-source-code_372999-633.jpg?ga=GA1.1.1897646714.1743826808&semt=ais_hybrid&w=740" alt="Screenshot of custom ERP software" />
+          <div class="project-content">
+            <h4>Custom ERP Software Development</h4>
+            <p>Built scalable ERP software that streamlined global operations for a logistics firm.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+ <!-- 6. Testimonials -->
+    <section id="testimonials" aria-label="Client Testimonials">
+      <h2>What Our Clients Say</h2>
+      <blockquote class="testimonial" tabindex="0">
+        “Vicnot’s SEO expertise transformed our visibility online. The results were outstanding!" 
+        <strong>- Sarah K., CEO, RetailCo</strong>
+      </blockquote>
+      <blockquote class="testimonial" tabindex="0">
+        “Thanks to Vicnot’s IoT solutions, our factory operates more efficiently than ever.” 
+        <strong>- Matthew D., Operations Manager, ManuTech</strong>
+      </blockquote>
+      <blockquote class="testimonial" tabindex="0">
+        “Their custom software perfectly fits our evolving business needs. Highly recommend!” 
+        <strong>- Priya S., CTO, LogiSoft</strong>
+      </blockquote>
+    </section>
+
+        
+
+    
+      </div>
+    </section>
+    
+  </main> 
+  <footer>
+    <div class="footer-container" role="contentinfo">
+      <section class="footer-block" aria-labelledby="footerLinksTitle">
+        <h4 id="footerLinksTitle">Quick Links</h4>
+        <ul class="footer-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+        </ul>
+      </section>
+      <section class="footer-block" aria-labelledby="footerContactTitle">
+        <h4 id="footerContactTitle">Contact</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:info@vicnot.com">info@vicnot.com</a></li>
+          <li><i class="fas fa-phone" aria-hidden="true"></i>+1 (555) 123-4567</li>
+          <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i>123 Innovation Street</li>
+        </ul>
+      </section>
+      <section class="footer-block" aria-labelledby="footerFollowTitle">
+        <h4 id="footerFollowTitle">Follow Us</h4>
+        <div class="footer-social" role="list">
+          <a href="#" aria-label="Facebook" role="listitem"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter" role="listitem"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn" role="listitem"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram" role="listitem"><i class="fab fa-instagram"></i></a>
+        </div>
+      </section>
+    </div>
+    <div class="copyright" aria-live="polite">&copy; 2024 Vicnot. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vicnot - Portfolio</title>
+    <style>
+        /* Reset and base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a {
+            color: #0d9488;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        a:hover, a:focus {
+            color: #114d49;
+            outline: none;
+            transform: translateY(-2px);
+        }
+        header {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgb(15 23 42 / 0.3);
+        }
+        .nav-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: 0.08em;
+            color: #0d9488;
+            user-select: none;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav ul li a {
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.4rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        nav ul li a.active::after,
+        nav ul li a:hover::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 3px;
+            background: #0d9488;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        nav ul li a::after {
+            width: 0;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                background-color: #0f172a;
+                position: absolute;
+                top: 60px;
+                right: 2rem;
+                width: 200px;
+                padding: 1rem 0;
+                border-radius: 6px;
+                display: none;
+                box-shadow: 0 4px 30px rgb(15 23 42 / 0.4);
+            }
+            nav ul.show {
+                display: flex;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: right;
+                margin-right: 1.5rem;
+            }
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.75rem;
+            color: #0d9488;
+            cursor: pointer;
+            user-select: none;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+        main {
+            flex-grow: 1;
+            max-width: 1120px;
+            margin: 2.5rem auto 3rem;
+            padding: 0 1rem;
+        }
+        h1 {
+            color: #064e49;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            user-select: none;
+            text-align: center;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            gap: 2.5rem;
+        }
+        .project {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgb(100 116 139 / 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .project:hover, .project:focus {
+            box-shadow: 0 18px 40px rgb(13 148 136 / 0.25);
+            transform: translateY(-6px);
+            outline: none;
+        }
+        .project img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            user-select: none;
+        }
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #1e293b;
+        }
+        .project-content h3 {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #0d9488;
+        }
+        .project-content p {
+            font-size: 1rem;
+            line-height: 1.4;
+            flex-grow: 1;
+            color: #475569;
+        }
+        footer {
+            background-color: #0f172a;
+            color: #a5f3fc;
+            padding: 3rem 1rem 2rem;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            user-select: none;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+        }
+        .footer-block {
+            min-width: 180px;
+            flex: 1;
+        }
+        .footer-block h4 {
+            margin-bottom: 1.2rem;
+            color: #5eead4;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .footer-links,
+        .footer-contact {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li,
+        .footer-contact li {
+            margin-bottom: 0.7rem;
+        }
+        .footer-links li a,
+        .footer-contact li a {
+            color: #a5f3fc;
+            transition: color 0.3s ease;
+        }
+        .footer-links li a:hover,
+        .footer-contact li a:hover {
+            color: #0d9488;
+            outline: none;
+        }
+        .footer-contact li i {
+            margin-right: 0.6rem;
+            color: #0d9488;
+            min-width: 18px;
+            text-align: center;
+        }
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.3rem;
+            justify-content: center;
+        }
+        .footer-social a {
+            color: #a5f3fc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .footer-social a:hover,
+        .footer-social a:focus {
+            color: #0d9488;
+            outline: none;
+        }
+        .copyright {
+            margin-top: 2.5rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        /* Accessibility focus outlines */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #0d9488;
+            outline-offset: 3px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="nav-container">
+        <div class="nav-logo">Vicnot</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="careers.html">Careers</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h1>Our Portfolio</h1>
+    <div class="project-grid" role="list">
+        <article class="project" tabindex="0" role="listitem" aria-label="SEO Campaign for Retail Client project">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Computer screen with SEO dashboard showing analytics" />
+            <div class="project-content">
+                <h3>SEO Campaign for Retail Growth</h3>
+                <p>Boosted organic traffic by 70% in six months for a major retail client. Data-driven SEO strategies and ongoing optimization delivered outstanding results.</p>
+            </div>
+        </article>
+        <article class="project" tabindex="0" role="listitem" aria-label="IoT Manufacturing Automation project">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Industrial IoT control panel and factory automation" />
+            <div class="project-content">
+                <h3>Smart IoT Manufacturing Automation</h3>
+                <p>Integrated IoT devices and dashboards to improve factory productivity, reduce downtime, and enable real-time monitoring and predictive maintenance.</p>
+            </div>
+        </article>
+        <article class="project" tabindex="0" role="listitem" aria-label="Custom ERP Software Development project">
+            <img src="https://images.unsplash.com/photo-1531497865144-2f06e7a7b40f?auto=format&fit=crop&w=800&q=80" alt="Developers working on ERP software project" />
+            <div class="project-content">
+                <h3>Custom ERP Software Development</h3>
+                <p>Designed and deployed a scalable ERP system that streamlined operations and reporting for a fast-growing global logistics company.</p>
+            </div>
+        </article>
+        <article class="project" tabindex="0" role="listitem" aria-label="E-commerce website development project">
+            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=80" alt="E-commerce website on laptop and mobile devices" />
+            <div class="project-content">
+                <h3>E-commerce Platform Development</h3>
+                <p>Built a robust and user-friendly e-commerce platform featuring custom integrations with payment and shipping providers.</p>
+            </div>
+        </article>
+        <article class="project" tabindex="0" role="listitem" aria-label="Mobile app IoT monitoring project">
+            <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=800&q=80" alt="Mobile application monitoring IoT devices" />
+            <div class="project-content">
+                <h3>Mobile App for IoT Device Monitoring</h3>
+                <p>Developed a cross-platform mobile app enabling real-time monitoring and control of IoT devices for remote users.</p>
+            </div>
+        </article>
+        <article class="project" tabindex="0" role="listitem" aria-label="Analytics dashboard development project">
+            <img src="https://images.unsplash.com/photo-1508385082359-f4683d3fda0d?auto=format&fit=crop&w=800&q=80" alt="Analytics dashboard visuals on desktop monitor" />
+            <div class="project-content">
+                <h3>Custom Analytics Dashboard</h3>
+                <p>Created interactive dashboards to analyze complex datasets, helping clients make informed and timely decisions.</p>
+            </div>
+        </article>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-block">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h4>Contact Info</h4>
+            <ul class="footer-contact">
+                <li><i class="fas fa-map-marker-alt"></i>123 Tech Street, Silicon City</li>
+                <li><i class="fas fa-phone-alt"></i>+1 (800) 123-4567</li>
+                <li><i class="fas fa-envelope"></i>info@vicnot.com</li>
+            </ul>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">&copy; 2023 Vicnot. All rights reserved.</p>
+</footer>
+</body>
+</html>
